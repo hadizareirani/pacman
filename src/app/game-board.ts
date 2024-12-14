@@ -1,9 +1,9 @@
-import { MapCreator } from "../services/game/map";
+import { GameArea } from "../services/game/gameArea";
 
 export default customElements.define(
   "game-board",
   class extends HTMLElement {
-    map!: MapCreator;
+    gameArea!: GameArea;
     constructor() {
       super();
     }
@@ -11,7 +11,7 @@ export default customElements.define(
     connectedCallback() {
       const container = this.createContainerElement();
       this.appendChild(container);
-      this.map = new MapCreator(container);
+      this.gameArea = new GameArea(container);
     }
 
     private createContainerElement() {

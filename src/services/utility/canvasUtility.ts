@@ -10,7 +10,7 @@ export const canvasSizeHandler = (el: HTMLCanvasElement) => {
 
   el.width = screenWidht;
   el.height = screenHeight;
-  
+
   return {
     width: screenWidht,
     height: screenHeight,

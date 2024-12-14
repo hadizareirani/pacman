@@ -1,16 +1,41 @@
-import { canvasSizeHandler } from "./canvasUtility";
+import { ElementSize } from "../../models/element-size.model";
+import { TilesHeight, TilesWidth } from "../utility/const";
+import { tilesClass } from "./tiles";
 
 export class MapCreator {
-  map = [
-    [0, 1, 0, 1],
-    [0, 1, 0, 1],
-    [0, 1, 0, 1],
-    [0, 1, 0, 1],
+  private map = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
 
-  ctx: CanvasRenderingContext2D | null;
-  constructor(canvasEl: HTMLCanvasElement) {
-    const elementSize = canvasSizeHandler(canvasEl);
-    this.ctx = canvasEl.getContext("2d");
+  draw(
+    ctx: CanvasRenderingContext2D,
+    positons: Pick<ElementSize, "startPoints" | "endPoints">
+  ) {
+    for (let iRow = 0; iRow < this.map.length; iRow++) {
+      const row = this.map[iRow];
+      for (let iCol = 0; iCol < this.map[iRow].length; iCol++) {
+        const posX = positons.startPoints[0] + iCol * TilesWidth;
+        const posY = positons.startPoints[1] + iRow * TilesHeight;
+        new tilesClass[row[iCol]](ctx, posX, posY);
+      }
+    }
   }
 }
